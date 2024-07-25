@@ -1,6 +1,14 @@
-﻿namespace Library;
+﻿using System;
+using System.Threading.Tasks;
+using Telegram.Bot;
+using Telegram.Bot.Args;
+using Telegram.Bot.Types.ReplyMarkups;
+using Telegram.Bot.Types.Enums;
 
-public class Class1
+
+namespace Library;
+
+public class BotHandler
 {
 
 }
