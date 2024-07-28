@@ -1,18 +1,22 @@
 import json
 import openai
+from openai import OpenAI
 
 # Cargar configuración
-with open('settings.json') as config_file:
+with open('configuration\\appsettings.json') as config_file:
     config = json.load(config_file)
 
 OPENAI_API_KEY = config['OpenAiApiKey']
 
-openai.api_key = OPENAI_API_KEY
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 async def get_ai_response(prompt: str) -> str:
-    response = openai.Completion.create(
-        model="text-davinci-003",
-        prompt=prompt,
-        max_tokens=100
+    response = await client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": "You are a poetic assistant, skilled in explaining complex programming concepts with creative flair."},
+            {"role": "user", "content": prompt}
+        ]
     )
-    return response.choices[0].text.strip()
+    return response.choices[0].message['content']
+

@@ -10,7 +10,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 with open('configuration\\appsettings.json') as config_file:
     config = json.load(config_file)
 
-TELEGRAM_API_TOKEN = config['TELEGRAM_API_TOKEN']
+TELEGRAM_API_TOKEN = config['TelegramApiToken']
 
 # Configuración principal
 def main() -> None:
