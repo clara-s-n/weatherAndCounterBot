@@ -20,7 +20,12 @@ def main() -> None:
     application.add_handler(CallbackQueryHandler(button))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
-    application.run_polling()
+    try:
+        application.run_polling()
+    except KeyboardInterrupt:
+        print("Bot detenido por el usuario")
+    finally:
+        application.stop()
 
 if __name__ == '__main__':
     main()
