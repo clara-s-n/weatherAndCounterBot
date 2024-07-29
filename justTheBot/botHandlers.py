@@ -8,6 +8,9 @@ keyboard = [
         [
             InlineKeyboardButton("Clima", callback_data='clima'),
             InlineKeyboardButton("Contador", callback_data='contador')
+        ],
+        [
+            InlineKeyboardButton("Salir", callback_data='salir')
         ]
     ]
 
@@ -22,6 +25,9 @@ async def button(update: Update, context: CallbackContext) -> None:
     global contador
     if query.data == 'clima':
         await query.message.reply_text(text="Por favor, ingresa el nombre de la ciudad para obtener el clima:")
+    elif query.data == 'salir':
+        await query.message.reply_text(text="El bot se está cerrando. ¡Adiós!")
+        await context.application.stop()
     elif query.data == 'contador':
         contador += 1
         await query.message.reply_text(text=f"Contador: {contador}")

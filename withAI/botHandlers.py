@@ -10,6 +10,9 @@ keyboard = [
         InlineKeyboardButton("Clima", callback_data='clima'),
         InlineKeyboardButton("Contador", callback_data='contador'),
         InlineKeyboardButton("AI", callback_data='ai')
+    ],
+    [
+        InlineKeyboardButton("Salir", callback_data='salir')
     ]
 ]
 
@@ -28,13 +31,15 @@ async def button(update: Update, context: CallbackContext) -> None:
     elif query.data == 'contador':
         contador += 1
         await query.message.reply_text(text=f"Contador: {contador}")
-        # Mostrar el menú con botones nuevamente
         reply_markup = InlineKeyboardMarkup(keyboard)
-        await update.message.reply_text('Elige una opción:', reply_markup=reply_markup)
+        await query.message.reply_text('Elige una opción:', reply_markup=reply_markup)
         
     elif query.data == 'ai':
         context.user_data['awaiting_ai'] = True
         await query.message.reply_text(text="Por favor, ingresa tu consulta para AI:")
+    elif query.data == 'salir':
+        await query.message.reply_text(text="El bot se está cerrando. ¡Adiós!")
+        await context.application.stop()
 
 async def handle_message(update: Update, context: CallbackContext) -> None:
     text = update.message.text
